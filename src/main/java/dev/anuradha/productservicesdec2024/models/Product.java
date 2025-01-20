@@ -1,11 +1,14 @@
 package dev.anuradha.productservicesdec2024.models;
 
+import jakarta.persistence.*;
 import lombok.*;
+@Entity
 public class Product extends BaseModel {
 
     private String title;
     private String description;
     private String imageUrl;
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Category category;
     private double price;
 

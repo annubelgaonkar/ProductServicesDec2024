@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.web.service.annotation.PostExchange;
 
 public class FakeStoreProductDto {
+
     private String title;
     private String description;
     private String image;

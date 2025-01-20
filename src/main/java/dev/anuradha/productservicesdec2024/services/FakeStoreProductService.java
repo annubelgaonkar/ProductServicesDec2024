@@ -5,25 +5,34 @@ import dev.anuradha.productservicesdec2024.dtos.FakeStoreProductDto;
 import dev.anuradha.productservicesdec2024.models.Product;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
     private RestTemplate restTemplate;  //using this we can call 3rd party apis
 
     public FakeStoreProductService(RestTemplate restTemplate) {
+
         this.restTemplate = restTemplate;
     }
 
     @Override
     public List<Product> getAllProducts(){
-        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products", FakeStoreProductDto[].class);
+        log.info("Getting all products from fakestore");
+        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products",
+                FakeStoreProductDto[].class);
+
         List<Product> products = new ArrayList<>();
+
         for (FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
             Product p = fakeStoreProductDto.toProduct();
             products.add(p);
@@ -34,8 +43,10 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public Product getSingleProduct(long id){
 
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
-        return fakeStoreProductDto.toProduct();
+        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponse = restTemplate.getForEntity("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
+
+       // FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
+        return fakeStoreProductDtoResponse.getBody().toProduct();
     }
 
     @Override

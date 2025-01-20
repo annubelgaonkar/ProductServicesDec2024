@@ -1,6 +1,7 @@
 package dev.anuradha.productservicesdec2024.controllers;
 
 import dev.anuradha.productservicesdec2024.dtos.CreateProductRequestDto;
+import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +15,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(@Qualifier("fakeStoreProductService")ProductService productService) {
+    public ProductController(@Qualifier("selfProductService")ProductService productService) {
         this.productService = productService;
     }
 
@@ -24,14 +25,12 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public Product getSingleProduct(@PathVariable("id") long id){
+    public Product getSingleProduct(@PathVariable("id") long id) throws ProductNotFoundException {
          return productService.getSingleProduct(id);
     }
 
     @PostMapping("/products")
-    public Product createProduct(@RequestBody CreateProductRequestDto createProductRequestDto)
-    {
-
+    public Product createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
         return productService.createProduct(createProductRequestDto.getTitle(),
                 createProductRequestDto.getDescription(),
                 createProductRequestDto.getImage(),

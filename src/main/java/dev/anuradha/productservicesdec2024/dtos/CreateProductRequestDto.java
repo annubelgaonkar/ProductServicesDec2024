@@ -1,6 +1,5 @@
 package dev.anuradha.productservicesdec2024.dtos;
 
-
 public class CreateProductRequestDto {
     private String title;
     private String description;
