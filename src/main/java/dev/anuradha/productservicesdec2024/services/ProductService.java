@@ -17,4 +17,9 @@ public interface ProductService {
                          String imageUrl,
                          String category,
                          double price);
+
+    Product updateProduct(Long id, Product product);
+
+    void deleteProduct(Long id);
+
 }

@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-@Slf4j
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
@@ -27,7 +26,7 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public List<Product> getAllProducts(){
-        log.info("Getting all products from fakestore");
+       // log.info("Getting all products from fakestore");
         FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products",
                 FakeStoreProductDto[].class);
 
@@ -65,5 +64,18 @@ public class FakeStoreProductService implements ProductService {
                 fakeStoreProductDto,
                 FakeStoreProductDto.class).toProduct();
 //        return fakeStoreProductDto1.toProduct();
+    }
+
+    //this API cannot be called because Fakestore will not allow us to update product
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        return null;
+    }
+
+    //    //this API cannot be called because Fakestore will not allow us to delete product
+    // I am only creating these 2 additional APIs for selfProductService
+    @Override
+    public void deleteProduct(Long id) {
+        return;
     }
 }

@@ -6,6 +6,7 @@ import dev.anuradha.productservicesdec2024.models.Category;
 import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.repositories.CategoryRepository;
 import dev.anuradha.productservicesdec2024.repositories.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -66,5 +67,21 @@ public class SelfProductService implements ProductService {
         return createdProduct;
     }
 
+    @Override
+    public Product updateProduct(Long id, Product product){
+      if(productRepository.existsById(id)){
+          product.setId(id);
+          Product updatedProduct = productRepository.save(product);
+          return updatedProduct;
+      }
+      else{
+          throw new EntityNotFoundException("Product with the given id does not exist");
+      }
+    }
+
+    @Override
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
 
 }
