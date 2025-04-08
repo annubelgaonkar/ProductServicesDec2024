@@ -12,16 +12,16 @@ Features
 
 Core Functionality
 1. Get All Products:
-  - Retrieves a list of all available products.
-  - Exposed as a GET API: /products
+   - Retrieves a list of all available products.
+   - Exposed as a GET API: /products
     
 2. Get Product by ID:
-  - Fetches details of a specific product by its unique identifier.
-  - Exposed as a GET API: /products/{id}
+   - Fetches details of a specific product by its unique identifier.
+   - Exposed as a GET API: /products/{id}
     
 3. Create Product:
-  - Allows adding a new product to the database with validation and error handling.
-  - Exposed as a POST API: /products
+   - Allows adding a new product to the database with validation and error handling.
+   - Exposed as a POST API: /products
     
 4. Update Product
    - Updates an existing product identified by its ID
