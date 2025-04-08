@@ -54,18 +54,18 @@ Installation and Setup
 2. Configure the application.properties File
    - Update the application.properties file with the following configurations:
       - MySQL:
-        spring.application.name=Product_Services_Dec2024
-        server.port=8080
-        logging.level.org.springframework.web=debug
-        spring.jpa.hibernate.ddl-auto=update
-        spring.datasource.url=jdbc:mysql://localhost:3306/productServiceDec2024
-        spring.datasource.username=your_mysql_username
-        spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-        spring.jpa.show-sql: true
+        - spring.application.name=Product_Services_Dec2024
+        - server.port=8080
+        - logging.level.org.springframework.web=debug
+        - spring.jpa.hibernate.ddl-auto=update
+        - spring.datasource.url=jdbc:mysql://localhost:3306/productServiceDec2024
+        - spring.datasource.username=your_mysql_username
+        - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+        - spring.jpa.show-sql: true
         
       - Redis:
-        spring.redis.host=localhost
-        spring.redis.port=6379
+        - spring.redis.host=localhost
+        - spring.redis.port=6379
         
 3. Run the Application
      - Using Maven: You can run the application with the following command:
