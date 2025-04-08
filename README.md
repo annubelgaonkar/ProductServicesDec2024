@@ -2,7 +2,7 @@
 
 ProductService is a backend microservice designed to manage product-related operations in an e-commerce platform. It handles the creation, updating, retrieval, and deletion of products, providing a seamless API for front-end and other microservices like PaymentService.
 
-Features
+API Endpoints
 - Architecture: Built on the MVC design pattern for clear separation of concerns.
 - Caching: Integrated Redis for caching to improve data retrieval speed and reduce database load.
 - Persistence: Utilized JPA with Hibernate ORM for seamless database interaction and efficient CRUD operations.
