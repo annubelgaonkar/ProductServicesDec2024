@@ -24,10 +24,10 @@ Core Functionality
   - Exposed as a POST API: /products
     
 4. Update Product
-  - Updates an existing product identified by its ID.
-  - Exposed as a PUT API: /products/{id}
+   - Updates an existing product identified by its ID
+   - Exposed as a PUT API: /products/{id}
 
-5. Delete Product
+6. Delete Product
    - Deletes a product by its ID.
    - Exposed as a DELETE API: /products/{id}
    
