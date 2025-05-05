@@ -7,6 +7,9 @@ import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.repositories.CategoryRepository;
 import dev.anuradha.productservicesdec2024.repositories.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -84,4 +87,11 @@ public class SelfProductService implements ProductService {
         productRepository.deleteById(id);
     }
 
+    @Override
+    public Page<Product> getPaginatedProducts(int pageNo, int pageSize) {
+
+        return productRepository.findAll(PageRequest.of(pageNo,
+                pageSize,
+                Sort.by("title").descending().and(Sort.by("price").ascending())));
+    }
 }

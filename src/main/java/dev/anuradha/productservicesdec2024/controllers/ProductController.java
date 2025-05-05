@@ -6,6 +6,7 @@ import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ import java.util.List;
 public class ProductController {
 
     @Qualifier("selfProductService")
-    @Autowired
+
+
     private ProductService productService;
 
     public ProductController(@Qualifier("selfProductService") ProductService productService) {
@@ -33,6 +35,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getSingleProduct(@PathVariable("id") long id) throws ProductNotFoundException {
         return productService.getSingleProduct(id);
+    }
+
+    @GetMapping("/paginated")
+    Page<Product> getPaginatedProducts(@RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
+        return productService.getPaginatedProducts(pageNo, pageSize);
     }
 
     @PostMapping

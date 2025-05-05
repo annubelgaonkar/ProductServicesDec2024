@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 @org.springframework.web.bind.annotation.ControllerAdvice
+@Controller
 public class ControllerAdvice {
 
     @ExceptionHandler(ProductNotFoundException.class)
