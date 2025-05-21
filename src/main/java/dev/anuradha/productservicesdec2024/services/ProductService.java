@@ -21,7 +21,7 @@ public interface ProductService {
 
     Product updateProduct(Long id, Product product);
 
-    void deleteProduct(Long id);
+    void deleteProduct(Long id) throws ProductNotFoundException;
 
     Page<Product> getPaginatedProducts(int pageNo, int pageSize);
 }

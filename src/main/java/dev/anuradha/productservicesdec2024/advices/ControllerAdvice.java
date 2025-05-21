@@ -5,10 +5,9 @@ import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
-@org.springframework.web.bind.annotation.ControllerAdvice
 @Controller
 public class ControllerAdvice {
 
@@ -21,4 +20,17 @@ public class ControllerAdvice {
         return responseEntity;
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDTO> handleGenericException(Exception ex){
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setMessage(ex.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setMessage(ex.getBindingResult().getFieldError().getDefaultMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
 }

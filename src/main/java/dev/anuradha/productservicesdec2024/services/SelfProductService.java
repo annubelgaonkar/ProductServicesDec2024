@@ -1,6 +1,5 @@
 package dev.anuradha.productservicesdec2024.services;
 
-import dev.anuradha.productservicesdec2024.dtos.FakeStoreProductDto;
 import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import dev.anuradha.productservicesdec2024.models.Category;
 import dev.anuradha.productservicesdec2024.models.Product;
@@ -11,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +19,6 @@ import java.util.Optional;
 public class SelfProductService implements ProductService {
 
     private ProductRepository productRepository;
-
     private CategoryRepository categoryRepository;
 
     public SelfProductService(ProductRepository productRepository,
@@ -41,7 +39,6 @@ public class SelfProductService implements ProductService {
     @Override
     public List<Product> getAllProducts(){
         List<Product> products = productRepository.findAll();
-
         return products;
     }
 
@@ -62,6 +59,7 @@ public class SelfProductService implements ProductService {
             Category newCategory = new Category();
             newCategory.setTitle(category);
             product.setCategory(newCategory);
+            categoryRepository.save(newCategory);
         }
         else{
             product.setCategory(categoryFromDB);
@@ -83,15 +81,19 @@ public class SelfProductService implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Long id){
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 
     @Override
     public Page<Product> getPaginatedProducts(int pageNo, int pageSize) {
 
-        return productRepository.findAll(PageRequest.of(pageNo,
-                pageSize,
-                Sort.by("title").descending().and(Sort.by("price").ascending())));
+        return productRepository.findAll(
+                PageRequest.of(
+                        pageNo,
+                        pageSize,
+                        Sort.by("title").descending().and(Sort.by("price").ascending())
+                )
+        );
     }
 }

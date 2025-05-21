@@ -4,6 +4,7 @@ import dev.anuradha.productservicesdec2024.dtos.CreateProductRequestDto;
 import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -18,8 +19,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Qualifier("selfProductService")
-
+   // @Qualifier("selfProductService")
 
     private ProductService productService;
 
@@ -43,10 +43,10 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
+    public Product createProduct(@Valid @RequestBody CreateProductRequestDto createProductRequestDto) {
         return productService.createProduct(createProductRequestDto.getTitle(),
                 createProductRequestDto.getDescription(),
-                createProductRequestDto.getImage(),
+                createProductRequestDto.getImageUrl(),
                 createProductRequestDto.getCategory(),
                 createProductRequestDto.getPrice());
     }
@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws ProductNotFoundException {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
