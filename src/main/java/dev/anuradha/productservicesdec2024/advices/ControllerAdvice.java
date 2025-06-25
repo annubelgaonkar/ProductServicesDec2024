@@ -7,12 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@Controller
+@RestControllerAdvice
 public class ControllerAdvice {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorDTO> handleProductNotProductNotFoundException(ProductNotFoundException productNotFoundException){
+    public ResponseEntity<ErrorDTO> handleProductNotFoundException(ProductNotFoundException productNotFoundException){
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setMessage(productNotFoundException.getMessage());
 
