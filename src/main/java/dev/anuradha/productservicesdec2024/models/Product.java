@@ -2,6 +2,8 @@ package dev.anuradha.productservicesdec2024.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+@Data
 @Entity
 public class Product extends BaseModel {
 
@@ -12,45 +14,18 @@ public class Product extends BaseModel {
     private Category category;
     private double price;
 
-  public String getTitle() {
-    return title;
-  }
+    public Product(Long id, String title, String description, String imageUrl, Category category, double price) {
+        this.setId(id);
+        this.title = title;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.price = price;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public Product() {
 
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getImageUrl() {
-    return imageUrl;
-  }
-
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
-
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
-  }
-
-  public double getPrice() {
-    return price;
-  }
-
-  public void setPrice(double price) {
-    this.price = price;
-  }
+    }
 }
 
 /*

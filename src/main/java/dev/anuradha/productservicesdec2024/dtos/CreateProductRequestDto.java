@@ -2,6 +2,13 @@ package dev.anuradha.productservicesdec2024.dtos;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
 public class CreateProductRequestDto {
 
     @NotBlank(message = "Title is required")
@@ -16,36 +23,5 @@ public class CreateProductRequestDto {
     @Min(value = 0, message = "Price must be positive")
     private double price;
 
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-    public void setImage(String image) {
-        this.imageUrl = imageUrl;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

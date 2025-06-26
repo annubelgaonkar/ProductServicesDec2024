@@ -6,6 +6,8 @@ import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.repositories.CategoryRepository;
 import dev.anuradha.productservicesdec2024.repositories.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,14 +22,10 @@ import java.util.Optional;
 @Service("selfProductService")
 public class SelfProductService implements ProductService {
 
+    @Autowired
     private ProductRepository productRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
-
-    public SelfProductService(ProductRepository productRepository,
-                              CategoryRepository categoryRepository) {
-                    this.productRepository = productRepository;
-                    this.categoryRepository = categoryRepository;
-    }
 
     @Override
     public Product getSingleProduct(long id) throws ProductNotFoundException{
