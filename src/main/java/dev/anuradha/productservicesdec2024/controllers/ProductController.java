@@ -61,4 +61,12 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{productId}/{userId}")
+    public Product getProductDetailsBasedOnUserScope(@PathVariable Long productId,
+                                                     @PathVariable Long userId){
+        return productService.getDetailsBasedOnUserScope(productId, userId);
+    }
+
+
 }

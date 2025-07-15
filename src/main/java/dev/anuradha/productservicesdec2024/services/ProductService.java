@@ -24,4 +24,6 @@ public interface ProductService {
     void deleteProduct(Long id) throws ProductNotFoundException;
 
     Page<Product> getPaginatedProducts(int pageNo, int pageSize);
+
+    Product getDetailsBasedOnUserScope(Long productId, Long userId);
 }

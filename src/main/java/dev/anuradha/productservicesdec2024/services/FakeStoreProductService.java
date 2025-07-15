@@ -80,4 +80,9 @@ public class FakeStoreProductService implements ProductService {
     public Page<Product> getPaginatedProducts(int pageNo, int pageSize) {
         return null;
     }
+
+    @Override
+    public Product getDetailsBasedOnUserScope(Long productId, Long userId) {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package dev.anuradha.productservicesdec2024.services;
 
+import dev.anuradha.productservicesdec2024.dtos.AuthResponseDTO;
 import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import dev.anuradha.productservicesdec2024.models.Category;
 import dev.anuradha.productservicesdec2024.models.Product;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 
 import java.util.List;
@@ -26,6 +28,8 @@ public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public Product getSingleProduct(long id) throws ProductNotFoundException{
@@ -95,5 +99,24 @@ public class SelfProductService implements ProductService {
                         Sort.by("title").descending().and(Sort.by("price").ascending())
                 )
         );
+    }
+
+    @Override
+    public Product getDetailsBasedOnUserScope(Long productId, Long userId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if(optionalProduct.isEmpty()){
+            System.out.println("No product found");
+            return null;
+        }
+        //else check the scope of product whether it's is public or private
+        AuthResponseDTO authResponseDTO = restTemplate.getForObject("http://userAuthService/users/{userId}",AuthResponseDTO.class, userId);
+
+        if(authResponseDTO == null){
+            System.out.println("No user detail found");
+            return null;
+        }
+
+        System.out.println(authResponseDTO.getEmail());
+        return optionalProduct.get();
     }
 }
