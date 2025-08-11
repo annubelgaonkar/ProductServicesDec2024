@@ -40,6 +40,7 @@ public class SelfProductService implements ProductService {
 
         return optionalProduct.get();
     }
+
     @Override
     public List<Product> getAllProducts(){
         List<Product> products = productRepository.findAll();
@@ -96,7 +97,8 @@ public class SelfProductService implements ProductService {
                 PageRequest.of(
                         pageNo,
                         pageSize,
-                        Sort.by("title").descending().and(Sort.by("price").ascending())
+                        Sort.by("title").descending().
+                                and(Sort.by("price").ascending())
                 )
         );
     }

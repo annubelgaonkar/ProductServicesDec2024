@@ -5,7 +5,6 @@ import dev.anuradha.productservicesdec2024.exceptions.ProductNotFoundException;
 import dev.anuradha.productservicesdec2024.models.Product;
 import dev.anuradha.productservicesdec2024.services.ProductService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +16,11 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-   // @Qualifier("selfProductService")
     private ProductService productService;
 
-//    public ProductController(@Qualifier("selfProductService") ProductService productService) {
-//        this.productService = productService;
-//    }
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public List<Product> getAllProducts() {
